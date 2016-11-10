@@ -30,7 +30,17 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     @Override
     public void remove(int index) {
-
+        if(index >= getLength()) return;
+        int count = 0;
+        Node temp = head;
+        while(temp != null){
+            if(count == index - 1){
+                temp.next = temp.next.next;
+                counter--;
+            }
+            temp = temp.next;
+            count++;
+        }
     }
 
     @Override
@@ -74,6 +84,21 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     @Override
     public void insertAt(int index, T data) {
+        if(index >= counter) return;
+
+        Node newNode = new Node();
+        newNode.data = data;
+        newNode.next = null;
+        int count = 0;
+        Node temp = head;
+
+        while(temp != null){
+            if(index - 1 == count){
+
+                counter++;
+            }
+            count++;
+        }
 
     }
 
