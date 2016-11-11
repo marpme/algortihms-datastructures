@@ -15,7 +15,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * a background counter for all elements inside the list.
-     * Gets raised by adding elements, gets lowered by removing elemnts.
+     * Gets raised by adding elements, gets lowered by removing elements.
      * No direct getters or setters needed. Just the getLength function.
      */
     private int counter;
