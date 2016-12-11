@@ -49,7 +49,9 @@ public class SinglyLinkedList<T> implements Listable<T> {
      */
     @Override
     public void remove(int index) {
-        if(index > getLength()) return;
+
+        if(index > getLength())
+            return;
 
         if(getLength() == 1){
             head = null;
@@ -68,11 +70,11 @@ public class SinglyLinkedList<T> implements Listable<T> {
             temp = temp.next;
             count++;
         }
+
     }
 
     /**
      * Gets a certain element from the list on a specific index
-     *
      * @param index which specific item should be returned
      * @return element of <b>type T</b>
      */
@@ -81,13 +83,33 @@ public class SinglyLinkedList<T> implements Listable<T> {
         Node temp = head;
         int co = 0;
         while (temp != null) {
-            co++;
             if (co == index) {
                 return temp.data;
             }
+            co++;
             temp = temp.next;
         }
         return null;
+    }
+
+    /**
+     * Sets a specific data at a given index.
+     *
+     * @param index where the data should be set
+     * @param data  what data should be set
+     */
+    @Override
+    public void set(int index, T data) {
+        Node temp = head;
+        int co = 0;
+        while (temp != null) {
+            if (co == index) {
+                temp.data = data;
+                return;
+            }
+            co++;
+            temp = temp.next;
+        }
     }
 
     /**
@@ -101,7 +123,6 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * Check's if the list is currently empty.
-     *
      * @return boolean if empty or not.
      */
     @Override
@@ -111,7 +132,6 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * Get the size/length of the current list.
-     *
      * @return Integer as length of the list.
      */
     @Override
@@ -145,37 +165,104 @@ public class SinglyLinkedList<T> implements Listable<T> {
     }
 
     /**
+     * Prints out one specific element on the console.
+     */
+    @Override
+    public void printSingle(int index) {
+        if(isEmpty() || getLength() < index || index <= 0) {
+            System.out.printf("{ Element not found. }%n");
+            return;
+        }
+
+        System.out.printf("Element@[index:%s] => %s %n", index, get(index));
+    }
+
+    /**
      * Inserts a certain new element on a specific index.
-     *
      * @param index where the item should be placed
      * @param data  which data it should contain.
      */
     @Override
     public void insertAt(int index, T data) {
-        if(index >= counter) return;
+        if(index > counter){
+            return;
+        }else if(index == 0){
+            this.insertAtFirst(data);
+            return;
+        }else if(index == counter){
+            this.insertAtLast(data);
+            return;
+        }else if(index < 0){
+            return;
+        }
 
         Node newNode = new Node();
         newNode.data = data;
         newNode.next = null;
+
         int count = 0;
         Node temp = head;
 
         while(temp != null){
-            if(index - 1 == count){
-
+            if(index == count){
+                newNode.next = temp.next;
+                temp.next = newNode;
                 counter++;
             }
             count++;
+            temp = temp.next;
         }
+    }
+
+
+    @Override
+    public void insertAtFirst(T data) {
+        if(data == null)
+            return;
+
+        Node newNode = new Node();
+        newNode.data = data;
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+
+    @Override
+    public void insertAtLast(T data) {
+        this.add(data);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SinglyLinkedList)) return false;
+
+        SinglyLinkedList<?> that = (SinglyLinkedList<?>) o;
+
+        if (counter != that.counter) return false;
+        return head != null ? head.equals(that.head) : that.head == null;
     }
 
     /**
      * Nested private class NODE for saving every
      * Data package in a single Node which knows the next node, only.
      */
-    private class Node {
+    public class Node {
         T data;
         Node next;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            try{
+                Node node = (Node) o;
+
+                if (!data.equals(node.data)) return false;
+                return next.equals(node.next);
+            }catch(Exception e){
+                return false;
+            }
+        }
+
     }
 
 

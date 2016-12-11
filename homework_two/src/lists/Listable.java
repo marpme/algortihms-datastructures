@@ -47,10 +47,42 @@ public interface Listable<T> {
     void printAll();
 
     /**
+     * Prints a single value at a given index.
+     * @param index
+     */
+    void printSingle(int index);
+
+    /**
+     * Sets a specific data at a given index.
+     * @param index where the data should be set
+     * @param data what data should be set
+     */
+    void set(int index, T data);
+
+    /**
      * Inserts a certain new element on a specific index.
      * @param index where the item should be placed
      * @param data which data it should contain.
      */
     void insertAt(int index, T data);
+
+    /**
+     * Inserts a Node at First index
+     * @param data contains the data
+     */
+    void insertAtFirst(T data);
+
+    /**
+     * Inserts a Node at after last index
+     * @param data contains the data
+     */
+    void insertAtLast(T data);
+
+    /**
+     * Turns the object into a string.
+     * @return a string of the object
+     */
+    @Override
+    String toString();
 
 }

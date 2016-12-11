@@ -5,8 +5,8 @@ package resources;
  */
 public enum Gender {
 
-    MALE(1),
-    FEMALE(2),
+    FEMALE(1),
+    MALE(2),
     OTHER(3);
 
     private final int value;
