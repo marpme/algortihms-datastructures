@@ -5,17 +5,8 @@ package resources;
  */
 public enum Gender {
 
-    FEMALE(1),
-    MALE(2),
-    OTHER(3);
+    FEMALE,
+    MALE,
+    OTHER
 
-    private final int value;
-
-    Gender(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return this.value;
-    }
 }

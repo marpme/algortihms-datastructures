@@ -3,30 +3,19 @@ package lists;
 /**
  * An singly linked list, which may contain any data you wish
  * linked with next node which has been added.
+ *
  * @param <T> the type of data you want to enter.
  */
-public class SinglyLinkedList<T> implements Listable<T> {
-
-    /**
-     * The head of all Nodes, our main entry point to add,
-     * remove, insert new elements.
-     */
-    private Node head;
-
-    /**
-     * a background counter for all elements inside the list.
-     * Gets raised by adding elements, gets lowered by removing elements.
-     * No direct getters or setters needed. Just the getLength function.
-     */
-    private int counter;
+public class SinglyLinkedList<T> extends Listable<T> {
 
     /**
      * Adds an element <b>type T</b> at the end of the list
+     *
      * @param data as <b>type T</b>
      */
     @Override
     public void add(T data) {
-        Node newNode = new Node();
+        Node<T> newNode = new Node<T>();
         newNode.data = data;
         newNode.next = null;
 
@@ -39,7 +28,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
             }
             temp.next = newNode;
         }
-        counter++;
+        length++;
     }
 
     /**
@@ -50,21 +39,21 @@ public class SinglyLinkedList<T> implements Listable<T> {
     @Override
     public void remove(int index) {
 
-        if(index > getLength())
+        if (index > getLength())
             return;
 
-        if(getLength() == 1){
+        if (getLength() == 1) {
             head = null;
-            counter--;
+            length--;
             return;
         }
 
         int count = 0;
-        Node temp = head;
-        while(temp != null){
-            if(count == index - 1){
+        Node<T> temp = head;
+        while (temp != null) {
+            if (count == index - 1) {
                 temp.next = temp.next.next;
-                counter--;
+                length--;
                 return;
             }
             temp = temp.next;
@@ -75,19 +64,20 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * Gets a certain element from the list on a specific index
+     *
      * @param index which specific item should be returned
      * @return element of <b>type T</b>
      */
     @Override
     public T get(int index) {
-        Node temp = head;
+        Node<T> temp = head;
         int co = 0;
         while (temp != null) {
             if (co == index) {
                 return temp.data;
             }
-            co++;
             temp = temp.next;
+            co++;
         }
         return null;
     }
@@ -100,15 +90,15 @@ public class SinglyLinkedList<T> implements Listable<T> {
      */
     @Override
     public void set(int index, T data) {
-        Node temp = head;
+        Node<T> temp = head;
         int co = 0;
         while (temp != null) {
             if (co == index) {
                 temp.data = data;
                 return;
             }
-            co++;
             temp = temp.next;
+            co++;
         }
     }
 
@@ -118,11 +108,12 @@ public class SinglyLinkedList<T> implements Listable<T> {
     @Override
     public void clear() {
         head = null;
-        counter = 0;
+        length = 0;
     }
 
     /**
      * Check's if the list is currently empty.
+     *
      * @return boolean if empty or not.
      */
     @Override
@@ -132,36 +123,20 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * Get the size/length of the current list.
+     *
      * @return Integer as length of the list.
      */
     @Override
     public int getLength() {
-        return counter;
+        return length;
     }
 
     /**
-     * Prints out all elements on the console.
+     * Prints out the current length of the list
      */
     @Override
-    public void printAll() {
-        System.out.printf(this.getClass().getSimpleName() + " [Size: %s] ", getLength());
-
-        if(isEmpty()) {
-            System.out.printf("{%n   => There are no items.%n}%n");
-            return;
-        }
-
-        Node temp = head;
-        String end = " { %n";
-        while (temp != null) {
-            if(temp.next != null){
-                end += "   => " + temp.data.toString() + ", %n";
-            }else {
-                end += "   => " + temp.data.toString();
-            }
-            temp = temp.next;
-        }
-        System.out.printf(end + "%n}%n");
+    public void printLength() {
+        System.out.printf("List length: %d %n", getLength());
     }
 
     /**
@@ -169,7 +144,7 @@ public class SinglyLinkedList<T> implements Listable<T> {
      */
     @Override
     public void printSingle(int index) {
-        if(isEmpty() || getLength() < index || index <= 0) {
+        if (isEmpty() || getLength() < index || index <= 0) {
             System.out.printf("{ Element not found. }%n");
             return;
         }
@@ -179,48 +154,49 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
     /**
      * Inserts a certain new element on a specific index.
+     *
      * @param index where the item should be placed
      * @param data  which data it should contain.
      */
     @Override
     public void insertAt(int index, T data) {
-        if(index > counter){
+        if (index > length) {
             return;
-        }else if(index == 0){
+        } else if (index == 0) {
             this.insertAtFirst(data);
             return;
-        }else if(index == counter){
+        } else if (index == length) {
             this.insertAtLast(data);
             return;
-        }else if(index < 0){
+        } else if (index < 0) {
             return;
         }
 
-        Node newNode = new Node();
+        Node<T> newNode = new Node<T>();
         newNode.data = data;
         newNode.next = null;
 
-        int count = 0;
-        Node temp = head;
+        int count = 1;
+        Node<T> temp = head;
 
-        while(temp != null){
-            if(index == count){
+        while (temp != null) {
+            if (index == count) {
                 newNode.next = temp.next;
                 temp.next = newNode;
-                counter++;
+                length++;
+                return;
             }
-            count++;
             temp = temp.next;
+            count++;
         }
     }
 
-
     @Override
     public void insertAtFirst(T data) {
-        if(data == null)
+        if (data == null)
             return;
 
-        Node newNode = new Node();
+        Node<T> newNode = new Node<T>();
         newNode.data = data;
         newNode.next = this.head;
         this.head = newNode;
@@ -238,32 +214,13 @@ public class SinglyLinkedList<T> implements Listable<T> {
 
         SinglyLinkedList<?> that = (SinglyLinkedList<?>) o;
 
-        if (counter != that.counter) return false;
+        if (length != that.length) return false;
         return head != null ? head.equals(that.head) : that.head == null;
     }
 
-    /**
-     * Nested private class NODE for saving every
-     * Data package in a single Node which knows the next node, only.
-     */
-    public class Node {
+    private class Node<T> {
         T data;
-        Node next;
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            try{
-                Node node = (Node) o;
-
-                if (!data.equals(node.data)) return false;
-                return next.equals(node.next);
-            }catch(Exception e){
-                return false;
-            }
-        }
-
+        Node<T> next;
     }
-
 
 }

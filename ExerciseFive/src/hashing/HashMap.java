@@ -14,7 +14,7 @@ public class HashMap<T> implements IHashable{
 
     private IProbing probeFunc;
 
-    private HashEntry[] entries;
+    private HashEntry<T>[] entries;
 
     public HashMap(int m, IProbing probe) {
         this.m = m;
@@ -42,7 +42,7 @@ public class HashMap<T> implements IHashable{
         entries[hashValue] = a;
     }
 
-    public Object get(int key){
+    public T get(int key){
 
         int hashValue = hash(key, 0);
         int j = 0;

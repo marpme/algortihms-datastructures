@@ -1,8 +1,7 @@
 package sort;
 
+import comparator.Comparator;
 import lists.Listable;
-import lists.SinglyLinkedList;
-import sort.comparator.Comparator;
 
 /**
  * Created by marvinpiekarek on 21/11/2016.

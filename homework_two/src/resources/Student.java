@@ -31,12 +31,11 @@ public class Student {
     private int mn;
 
     /**
-     *  Variable for the gender
+     * Variable for the gender
      */
     private Gender gender;
 
     /**
-     *
      * @param name
      * @param surname
      * @param fieldStudy
@@ -54,7 +53,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     @Override
@@ -96,7 +94,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public String getName() {
@@ -104,7 +101,6 @@ public class Student {
     }
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
@@ -112,7 +108,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public String getSurname() {
@@ -120,7 +115,6 @@ public class Student {
     }
 
     /**
-     *
      * @param surname
      */
     public void setSurname(String surname) {
@@ -128,7 +122,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public int getAge() {
@@ -136,7 +129,6 @@ public class Student {
     }
 
     /**
-     *
      * @param age
      */
     public void setAge(int age) {
@@ -144,7 +136,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public String getFieldOfStudies() {
@@ -152,7 +143,6 @@ public class Student {
     }
 
     /**
-     *
      * @param fieldOfStudies
      */
     public void setFieldOfStudies(String fieldOfStudies) {
@@ -160,7 +150,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public int getMn() {
@@ -168,7 +157,6 @@ public class Student {
     }
 
     /**
-     *
      * @param mn
      */
     public void setMn(int mn) {
@@ -176,7 +164,6 @@ public class Student {
     }
 
     /**
-     *
      * @return
      */
     public Gender getGender() {
@@ -184,7 +171,6 @@ public class Student {
     }
 
     /**
-     *
      * @param gender
      */
     public void setGender(Gender gender) {
